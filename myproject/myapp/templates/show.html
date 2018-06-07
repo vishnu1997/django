@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html >
+<head>
+    <title>Resume Form</title>
+</head>
+<body>
+    <h>Resumes Submitted</h>
+    {% for me in myprojecte %}
+    <p>hiii this is index {{ me.name }} page</p>
+    <p>hiii this is index {{ me.regno }} page</p>
+    <p>hiii this is index {{ me.cgpa }} page</p>
+    <p>hiii this is index {{ me.email }} page</p>
+    <p>hiii this is index {{ me.location}} page</p>
+    <p>hiii this is index {{ me.img_url }} page</p>
+    <br>
+    {% endfor %}
+</body>
