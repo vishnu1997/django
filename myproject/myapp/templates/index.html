@@ -1,9 +1,12 @@
 {% load staticfiles %}
+{% load app_filter %} 
 
 <!DOCTYPE html>
 <html >
 <head>
     <title>Resume Form</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
 </head>
 <body>
         <nav class="navbar navbar-default navbar-static-top text-center" role="navigation">
@@ -15,10 +18,32 @@
                     <a class="navbar-text navbar-right" href="{% url 'Login' %}">Login</a>
                 {% endif %}
               </nav>
-
+    {% if request.user|has_group:"HR" %}
     <form enctype="multipart/form-data" action="post_url/" method="post" >
             {% csrf_token %}
           {{form.as_p}}
         <input type="submit" value="Submit" />
     </form>
+    <br>
+    <hr>
+    
+    <p>User belongs to Maggi
+    {% else %}
+    <p>Ask for permissions for adding new persons i.e into group HR</p>
+    <a href="{% url 'reqhr' usr=user.username %}" class="btn btn-default">Request</a> 
+    {% endif %}
+    <hr>
+    <br>
+    <hr>
+    {% if request.user|has_group:"accountant" %}
+    <p>User belongs to accountant</p>
+    <p>An accountant is a practitioner of accounting or accountancy, which is the 
+        measurement, disclosure or provision of assurance about financial information
+         that helps managers, investors, tax authorities and others make decisions
+          about allocating resource(s).</p>
+    {% else %}
+    <p>Ask for permissions for accountant</p>
+    <a href="{% url 'reqacc' usr=user.username %}" class="btn btn-default">Request</a>
+    {% endif %}
+    <hr>
 </body>
